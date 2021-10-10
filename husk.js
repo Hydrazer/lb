@@ -25,20 +25,8 @@
   .ngn_x{float:right;color:#999;cursor:pointer;margin-top:-3px}
   .ngn_x:hover{color:#f00}
  </style>`
-	d.body.appendChild(el)
-	let t, ts = [], lb = el.firstChild, bqm = 0 //t:textarea or input, lb:language bar, bqm:backquote mode
-	let pd = x => x.preventDefault()
-	let ev = (x, t, f, c) => x.addEventListener(t, f, c)
-	ev(lb, 'mousedown', x => {
-		if (x.target.classList.contains('ngn_x')) { lb.hidden = 1; upd(); pd(x); return }
-		if (x.target.nodeName === 'B' && t) {
-			let i = t.selectionStart, j = t.selectionEnd, v = t.value, s = x.target.textContent
-			if (i != null && j != null) { t.value = v.slice(0, i) + s + v.slice(j); t.selectionStart = t.selectionEnd = i + s.length }
-			pd(x); return
-		}
-	})
-	let fk = x => {
-		console.log("bruh momento");
+	
+	await function fk(x) {
 		let t = x.target
 		if (bqm) {
 			let i = t.selectionStart, v = t.value, c = bqc[x.key]; if (x.which > 31) { bqm = 0; d.body.classList.remove('ngn_bq') }
@@ -52,6 +40,19 @@
 			}
 		}
 	}
+	
+	d.body.appendChild(el)
+	let t, ts = [], lb = el.firstChild, bqm = 0 //t:textarea or input, lb:language bar, bqm:backquote mode
+	let pd = x => x.preventDefault()
+	let ev = (x, t, f, c) => x.addEventListener(t, f, c)
+	ev(lb, 'mousedown', x => {
+		if (x.target.classList.contains('ngn_x')) { lb.hidden = 1; upd(); pd(x); return }
+		if (x.target.nodeName === 'B' && t) {
+			let i = t.selectionStart, j = t.selectionEnd, v = t.value, s = x.target.textContent
+			if (i != null && j != null) { t.value = v.slice(0, i) + s + v.slice(j); t.selectionStart = t.selectionEnd = i + s.length }
+			pd(x); return
+		}
+	})
 	let ff = x => {
 		let t0 = x.target, nn = t0.nodeName.toLowerCase()
 		if (nn !== 'textarea' && (nn !== 'input' || t0.type !== 'text' && t0.type !== 'search')) return
