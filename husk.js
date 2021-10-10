@@ -26,6 +26,10 @@
   .ngn_x:hover{color:#f00}
  </style>`
 	
+	function sleep(ms) {
+	  	return new Promise(resolve => setTimeout(resolve, ms));
+	}
+	
 	await function fk(x) {
 		let t = x.target
 		if (bqm) {
@@ -34,6 +38,7 @@
 		}
 		switch (x.ctrlKey + 2 * x.shiftKey + 4 * x.altKey + 8 * x.metaKey + 100 * x.which) {
 			case 900: {
+				await sleep(50);
 				let i = t.selectionStart, v = t.value, c = tc[v.slice(i - 3, i)] //tab
 				if (c) { t.value = v.slice(0, i - 3) + c + v.slice(i); t.selectionStart = t.selectionEnd = i - 1; pd(x) }
 				break
