@@ -38,6 +38,7 @@
 		}
 	})
 	let fk = x => {
+		console.log("bruh momento");
 		let t = x.target
 		if (bqm) {
 			let i = t.selectionStart, v = t.value, c = bqc[x.key]; if (x.which > 31) { bqm = 0; d.body.classList.remove('ngn_bq') }
